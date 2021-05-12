@@ -1,4 +1,4 @@
-# Laravel Bulletin Board
+# Laravel 6 Docker Boilerplate
 
 ## Technologies
 
