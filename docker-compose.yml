@@ -51,6 +51,17 @@ services:
     networks:
       - app-network
 
+  # SMTP Service
+  smtp4dev:
+    image: rnwood/smtp4dev:v3
+    container_name: smtp4dev
+    restart: always
+    ports:
+      - "3000:80"
+      - "2525:25"
+    networks:
+      - app-network
+
 #Docker Networks
 networks:
   app-network:
