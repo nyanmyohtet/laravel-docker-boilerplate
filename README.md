@@ -1,4 +1,4 @@
-# Laravel 6 Docker Boilerplate
+# Laravel Docker Boilerplate
 
 ## Technologies
 
@@ -14,6 +14,10 @@ Start docker containers
 Install Laravel Dependencies
 
 `docker run --rm -v "$(pwd)/laravel:/app" composer install --no-scripts`
+
+Copy ".env" file
+
+`docker-compose exec app cp .env.example .env`
 
 Generate APP_KEY
 
