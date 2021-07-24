@@ -27,7 +27,9 @@ Migrate Database
 
 `docker-compose exec app php artisan migrate`
 
-App is running at http://localhost:8080.
+App is running at http://localhost:8000.
+
+PHPMyAdmin is running at http://localhost:8080.
 
 SSH into 'app' container
 

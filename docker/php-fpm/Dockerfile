@@ -1,12 +1,19 @@
-# Set master image
-FROM php:7.2-fpm-alpine
+# PHP Version environment variable
+ARG PHP_VERSION
 
-# Set working directory
-WORKDIR /var/www/html
+# PHP Version alpine image to install based on the PHP_VERSION environment variable
+FROM php:$PHP_VERSION-fpm-alpine
+
+# Application environment variable
+ARG APP_ENV
+
+# Remote working directory environment variable
+ARG REMOTE_WORKING_DIR
 
 # Install Additional dependencies
-RUN apk update && apk add --no-cache \
-    build-base shadow vim curl \
+RUN apk update && apk add --no-cache $PHPIZE_DEPS \
+    build-base shadow vim nano curl gcc git bash \
+    nodejs nodejs-npm yarn \
     php7 \
     php7-fpm \
     php7-common \
@@ -25,30 +32,41 @@ RUN apk update && apk add --no-cache \
     php7-session \
     php7-zlib
 
-# Add and Enable PHP-PDO Extenstions
+# Install extensions
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-enable pdo_mysql
 
-# Install PHP Composer
-COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
+# install xdebug and enable it if the development environment is local
+RUN if [ $APP_ENV = "local" ]; then \
+   pecl install xdebug; \
+   docker-php-ext-enable xdebug; \
+fi;
 
-# Set composer valiables
+## Install composer.
+COPY --from=composer /usr/bin/composer /usr/local/bin/composer
+
+## Set composer valiables.
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /composer
 ENV PATH $PATH:/composer/vendor/bin
+
+# Download laravel installer.
+RUN composer global require laravel/installer
 
 # Remove Cache
 RUN rm -rf /var/cache/apk/*
 
 # Add UID '1000' to www-data
-RUN usermod -u 1000 www-data
+RUN apk add shadow && usermod -u 1000 www-data && groupmod -g 1000 www-data
 
 # Copy existing application directory permissions
-COPY --chown=www-data:www-data . /var/www/html
+COPY --chown=www-data:www-data . $REMOTE_WORKING_DIR
 
 # Change current user to www
 USER www-data
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
+
+# Run php-fpm
 CMD ["php-fpm"]
