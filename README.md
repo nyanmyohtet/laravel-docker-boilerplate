@@ -5,6 +5,10 @@
 - Laravel: 6.x
 - Composer: 2.x
 
+## GitHub App
+
+- [RenovateBot](https://app.renovatebot.com)
+
 ## Setup
 
 Start docker containers
