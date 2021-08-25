@@ -42,6 +42,10 @@ RUN if [ $APP_ENV = "local" ]; then \
    docker-php-ext-enable xdebug; \
 fi;
 
+## Set PHP memory limit
+RUN cd /usr/local/etc/php/conf.d/ && \
+    echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini
+
 ## Install composer.
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
