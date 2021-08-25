@@ -13,6 +13,8 @@ ARG REMOTE_WORKING_DIR
 # Install Additional dependencies
 RUN apk update && apk add --no-cache $PHPIZE_DEPS \
     build-base shadow vim nano curl gcc git bash \
+    libpng libpng-dev libjpeg-turbo-dev libwebp-dev zlib-dev libxpm-dev gd \
+    libzip-dev \
     nodejs nodejs-npm yarn \
     php7 \
     php7-fpm \
@@ -33,7 +35,7 @@ RUN apk update && apk add --no-cache $PHPIZE_DEPS \
     php7-zlib
 
 # Install extensions
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install gd zip pdo pdo_mysql
 RUN docker-php-ext-enable pdo_mysql
 
 # install xdebug and enable it if the development environment is local
