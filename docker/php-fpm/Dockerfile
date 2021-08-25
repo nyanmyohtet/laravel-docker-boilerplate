@@ -15,7 +15,7 @@ RUN apk update && apk add --no-cache $PHPIZE_DEPS \
     build-base shadow vim nano curl gcc git bash \
     libpng libpng-dev libjpeg-turbo-dev libwebp-dev zlib-dev libxpm-dev gd \
     libzip-dev \
-    nodejs nodejs-npm yarn \
+    nodejs npm yarn \
     php7 \
     php7-fpm \
     php7-common \
