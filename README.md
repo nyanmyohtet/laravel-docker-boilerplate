@@ -11,11 +11,19 @@
 
 ## Setup
 
+Build docker container(optional)
+
+`docker-compose build`
+
 Start docker containers
 
 `docker-compose up -d`
 
-Install Laravel Dependencies
+Install Laravel Framework
+
+`docker-compose exec app composer create-project --prefer-dist laravel/laravel . "6.*"`
+
+Install Laravel Dependencies(Run with PowerShell)
 
 `docker run --rm -v "$(pwd)/laravel:/app" composer install --no-scripts`
 
