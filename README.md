@@ -21,19 +21,9 @@ Start docker containers
 
 Install Laravel Framework
 
+`docker-compose exec app rm .gitignore`
+
 `docker-compose exec app composer create-project --prefer-dist laravel/laravel . "6.*"`
-
-Install Laravel Dependencies(Run with PowerShell)
-
-`docker run --rm -v "$(pwd)/laravel:/app" composer install --no-scripts`
-
-Copy ".env" file
-
-`docker-compose exec app cp .env.example .env`
-
-Generate APP_KEY
-
-`docker-compose exec app php artisan key:generate`
 
 Migrate Database
 
