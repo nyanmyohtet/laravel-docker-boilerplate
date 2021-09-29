@@ -25,6 +25,17 @@ Install Laravel Framework
 
 `docker-compose exec app composer create-project --prefer-dist laravel/laravel . "6.*"`
 
+Change `laravel/.env`
+
+```
+DB_CONNECTION=mysql
+DB_HOST=database
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=password
+```
+
 Migrate Database
 
 `docker-compose exec app php artisan migrate`
