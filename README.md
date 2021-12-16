@@ -2,7 +2,8 @@
 
 ## Technologies
 
-- Laravel: 6.x
+- PHP: 7.3
+- Laravel: 8.x
 - Composer: 2.x
 
 ## GitHub App
@@ -23,7 +24,7 @@ Install Laravel Framework
 
 `docker-compose exec app rm .gitignore`
 
-`docker-compose exec app composer create-project --prefer-dist laravel/laravel . "6.*"`
+`docker-compose exec app composer create-project --prefer-dist laravel/laravel . "8.*"`
 
 Change `laravel/.env`
 
